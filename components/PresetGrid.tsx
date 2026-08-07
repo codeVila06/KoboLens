@@ -35,23 +35,23 @@ function PresetIcon({ preset }: { preset: Preset }) {
 
 export default function PresetGrid({ onSelect }: PresetGridProps) {
   return (
-    <section className="max-w-lg mx-auto mt-12">
+    <section className="max-w-2xl mx-auto mt-12">
       <h2 className="text-lg font-semibold text-charcoal mb-4">Quick Examples</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {builtInPresets.map((preset) => (
           <button
             key={preset.id}
             onClick={() => onSelect(preset)}
-            className="bg-white rounded-xl border border-gray-200 overflow-hidden text-left hover:border-sage-300 hover:shadow-lg hover:-translate-y-0.5 transition group"
+            className="bg-white rounded-2xl border border-gray-200 overflow-hidden text-left hover:border-sage-300 hover:shadow-lg hover:-translate-y-0.5 transition group"
           >
-            <span className="block relative h-20 bg-sage-50 overflow-hidden">
+            <span className="block relative h-36 sm:h-40 bg-sage-50 overflow-hidden">
               <PresetIcon preset={preset} />
             </span>
-            <span className="block p-3">
+            <span className="block p-4">
               <span className="block text-sm font-medium text-charcoal group-hover:text-sage-800 transition leading-snug">
                 {preset.label}
               </span>
-              <span className="block text-xs text-gray-400 mt-0.5">
+              <span className="block text-sm text-gray-400 mt-1">
                 {formatCurrency(preset.amount)} · {preset.year}
               </span>
             </span>

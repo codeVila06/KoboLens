@@ -1,15 +1,16 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Bookmark, Share2, Check, TrendingDown } from "lucide-react";
+import { Bookmark, Share2, Check, TrendingDown, Download } from "lucide-react";
 import { CalculationResult } from "@/lib/calculator";
-import { formatCurrency } from "@/lib/utils";
+import { formatCurrency, downloadElementAsPng } from "@/lib/utils";
 import { saveCalculation } from "@/lib/storage";
 
 interface ResultCardProps {
   result: CalculationResult;
   onSave?: () => void;
   projectedYears?: number[];
+  captureRef?: React.RefObject<HTMLDivElement>;
 }
 
 function AnimatedNumber({ value, duration = 800 }: { value: number; duration?: number }) {
@@ -38,9 +39,15 @@ function AnimatedNumber({ value, duration = 800 }: { value: number; duration?: n
   return <span>{formatCurrency(display)}</span>;
 }
 
-export default function ResultCard({ result, onSave, projectedYears = [] }: ResultCardProps) {
+export default function ResultCard({
+  result,
+  onSave,
+  projectedYears = [],
+  captureRef,
+}: ResultCardProps) {
   const [saved, setSaved] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [downloaded, setDownloaded] = useState(false);
 
   const isProjected = projectedYears.includes(result.toYear);
 
@@ -54,6 +61,20 @@ export default function ResultCard({ result, onSave, projectedYears = [] }: Resu
     setSaved(true);
     onSave?.();
     setTimeout(() => setSaved(false), 2000);
+  };
+
+  const handleDownload = async () => {
+    if (!captureRef?.current) return;
+    try {
+      await downloadElementAsPng(
+        captureRef.current,
+        `kobolens-${result.fromYear}-to-${result.toYear}.png`
+      );
+      setDownloaded(true);
+      setTimeout(() => setDownloaded(false), 2000);
+    } catch {
+      // capture failed
+    }
   };
 
   const handleShare = async () => {
@@ -116,6 +137,15 @@ export default function ResultCard({ result, onSave, projectedYears = [] }: Resu
         >
           {copied ? <Check className="w-4 h-4 text-sage-600" /> : <Share2 className="w-4 h-4" />}
           {copied ? "Copied" : "Share Link"}
+        </button>
+
+        <button
+          onClick={handleDownload}
+          data-nodownload
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+        >
+          {downloaded ? <Check className="w-4 h-4 text-sage-600" /> : <Download className="w-4 h-4" />}
+          {downloaded ? "Saved" : "Save as Image"}
         </button>
       </div>
     </div>

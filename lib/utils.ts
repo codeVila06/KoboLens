@@ -24,3 +24,20 @@ export function shareUrl(url: string, title: string): Promise<void> {
   }
   return copyToClipboard(url);
 }
+
+export async function downloadElementAsPng(
+  node: HTMLElement,
+  filename: string
+): Promise<void> {
+  const { toPng } = await import("html-to-image");
+  const dataUrl = await toPng(node, {
+    pixelRatio: 2,
+    backgroundColor: "#f9faf9",
+    cacheBust: true,
+    filter: (domNode) => !(domNode instanceof HTMLElement && domNode.hasAttribute("data-nodownload")),
+  });
+  const link = document.createElement("a");
+  link.download = filename;
+  link.href = dataUrl;
+  link.click();
+}

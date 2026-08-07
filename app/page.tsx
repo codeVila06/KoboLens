@@ -30,6 +30,7 @@ export default function Home() {
   const [hasCalculated, setHasCalculated] = useState(false);
   const [dataStatus, setDataStatus] = useState<DataStatus>(() => getDataStatus());
   const lastCalcRef = useRef<{ amount: number; fromYear: number; toYear: number } | null>(null);
+  const captureRef = useRef<HTMLDivElement>(null);
 
   // Refresh CPI data from live sources on mount
   useEffect(() => {
@@ -150,8 +151,13 @@ export default function Home() {
       />
 
       {result && hasCalculated && (
-        <>
-          <ResultCard result={result} onSave={handleSave} projectedYears={dataStatus.projectedYears} />
+        <div ref={captureRef}>
+          <ResultCard
+            result={result}
+            onSave={handleSave}
+            projectedYears={dataStatus.projectedYears}
+            captureRef={captureRef}
+          />
           <ChartSection
             amount={result.amount}
             fromYear={result.fromYear}
@@ -159,7 +165,7 @@ export default function Home() {
             type={chartType}
             onTypeChange={setChartType}
           />
-        </>
+        </div>
       )}
 
       <PresetGrid onSelect={handlePresetSelect} />
