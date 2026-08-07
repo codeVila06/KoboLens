@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "baseYear": 2009,
+    "baseValue": 100,
+    "lastUpdated": "2026-08-07",
+    "source": "National Bureau of Statistics Nigeria",
+    "note": "Annual average CPI. 2024+ values bridged from NBS 2024 rebase (2024=100) to continuous 2009=100 series"
+  },
+  "data": [
+    {
+      "year": 2009,
+      "cpi": 100
+    },
+    {
+      "year": 2010,
+      "cpi": 113.7
+    },
+    {
+      "year": 2011,
+      "cpi": 126.1
+    },
+    {
+      "year": 2012,
+      "cpi": 141.5
+    },
+    {
+      "year": 2013,
+      "cpi": 153.5
+    },
+    {
+      "year": 2014,
+      "cpi": 165.8
+    },
+    {
+      "year": 2015,
+      "cpi": 180.8
+    },
+    {
+      "year": 2016,
+      "cpi": 209.2
+    },
+    {
+      "year": 2017,
+      "cpi": 243.7
+    },
+    {
+      "year": 2018,
+      "cpi": 273.1
+    },
+    {
+      "year": 2019,
+      "cpi": 304.3
+    },
+    {
+      "year": 2020,
+      "cpi": 344.6
+    },
+    {
+      "year": 2021,
+      "cpi": 403
+    },
+    {
+      "year": 2022,
+      "cpi": 478.9
+    },
+    {
+      "year": 2023,
+      "cpi": 597
+    },
+    {
+      "year": 2024,
+      "cpi": 795.5
+    },
+    {
+      "year": 2025,
+      "cpi": 978.5
+    },
+    {
+      "year": 2026,
+      "cpi": 1135.1
+    }
+  ]
+}
