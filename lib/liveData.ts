@@ -98,25 +98,27 @@ function apply(s: CPISeriesPoint[]): void {
   status.projectedYears = projectedYears;
 }
 
-export async function refreshLiveData(): Promise<void> {
+export async function refreshLiveData(force = false): Promise<void> {
   if (typeof window === "undefined") return;
 
   try {
-    const cachedRaw = localStorage.getItem(CACHE_KEY);
-    if (cachedRaw) {
-      const cached = JSON.parse(cachedRaw) as {
-        fetchedAt: number;
-        series: CPISeriesPoint[];
-      };
-      if (Date.now() - cached.fetchedAt < CACHE_TTL_MS && cached.series.length) {
-        apply(cached.series);
-        status = {
-          live: true,
-          source: "World Bank / IMF (cached)",
-          updated: new Date(cached.fetchedAt).toISOString().slice(0, 10),
-          projectedYears,
+    if (!force) {
+      const cachedRaw = localStorage.getItem(CACHE_KEY);
+      if (cachedRaw) {
+        const cached = JSON.parse(cachedRaw) as {
+          fetchedAt: number;
+          series: CPISeriesPoint[];
         };
-        return;
+        if (Date.now() - cached.fetchedAt < CACHE_TTL_MS && cached.series.length) {
+          apply(cached.series);
+          status = {
+            live: true,
+            source: "World Bank / IMF (cached)",
+            updated: new Date(cached.fetchedAt).toISOString().slice(0, 10),
+            projectedYears,
+          };
+          return;
+        }
       }
     }
 

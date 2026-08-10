@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { RefreshCw, RotateCcw } from "lucide-react";
 import Hero from "@/components/Hero";
 import CalculatorForm from "@/components/CalculatorForm";
 import ResultCard from "@/components/ResultCard";
@@ -31,6 +32,7 @@ export default function Home() {
   const [dataStatus, setDataStatus] = useState<DataStatus>(() => getDataStatus());
   const lastCalcRef = useRef<{ amount: number; fromYear: number; toYear: number } | null>(null);
   const captureRef = useRef<HTMLDivElement>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   // Refresh CPI data from live sources on mount
   useEffect(() => {
@@ -122,6 +124,22 @@ export default function Home() {
     setSavedCalcs(getSavedCalculations());
   }, []);
 
+  const handleRefreshData = useCallback(async () => {
+    setRefreshing(true);
+    try {
+      await refreshLiveData(true);
+      setDataStatus(getDataStatus());
+      const p = lastCalcRef.current;
+      if (p) {
+        setResult(calculateAdjustedPrice(p.amount, p.fromYear, p.toYear));
+      }
+    } catch {
+      // keep current data
+    } finally {
+      setRefreshing(false);
+    }
+  }, []);
+
   const handleSavedSelect = useCallback(
     (calc: SavedCalculation) => {
       handleCalculate(calc.amount, calc.fromYear, calc.toYear);
@@ -137,7 +155,7 @@ export default function Home() {
 
   return (
     <main className="max-w-3xl mx-auto px-4 sm:px-6 pb-8">
-      <div className="pt-6 pb-2">
+      <div className="pt-6 pb-2 flex items-center justify-between">
         <a
           href="/"
           aria-label="KoboLens home"
@@ -151,6 +169,15 @@ export default function Home() {
         >
           KoboLens
         </a>
+        <button
+          type="button"
+          onClick={() => window.location.reload()}
+          aria-label="Reload page"
+          title="Reload page"
+          className="inline-flex items-center justify-center w-9 h-9 rounded-full text-gray-600 hover:text-sage-800 hover:bg-sage-50 transition"
+        >
+          <RotateCcw className="w-4 h-4" />
+        </button>
       </div>
 
       <Hero />
@@ -190,7 +217,7 @@ export default function Home() {
 
       <Methodology status={dataStatus} />
 
-      <Footer status={dataStatus} />
+      <Footer status={dataStatus} onRefresh={handleRefreshData} refreshing={refreshing} />
     </main>
   );
 }
