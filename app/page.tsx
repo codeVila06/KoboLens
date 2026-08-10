@@ -138,7 +138,19 @@ export default function Home() {
   return (
     <main className="max-w-3xl mx-auto px-4 sm:px-6 pb-8">
       <div className="pt-6 pb-2">
-        <span className="text-xl font-bold text-sage-800 tracking-tight">KoboLens</span>
+        <a
+          href="/"
+          aria-label="KoboLens home"
+          onClick={(e) => {
+            if (window.location.pathname === "/") {
+              e.preventDefault();
+              window.location.reload();
+            }
+          }}
+          className="inline-block text-xl font-bold text-sage-800 tracking-tight hover:text-sage-900 transition"
+        >
+          KoboLens
+        </a>
       </div>
 
       <Hero />
