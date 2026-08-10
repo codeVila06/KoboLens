@@ -51,14 +51,14 @@ export default function PresetGrid({ onSelect }: PresetGridProps) {
               <span className="block text-sm font-medium text-charcoal group-hover:text-sage-800 transition leading-snug">
                 {preset.label}
               </span>
-              <span className="block text-sm text-gray-400 mt-1">
+              <span className="block text-sm text-gray-500 mt-1">
                 {formatCurrency(preset.amount)} · {preset.year}
               </span>
             </span>
           </button>
         ))}
       </div>
-      <p className="text-xs text-gray-400 mt-3">
+      <p className="text-xs text-gray-500 mt-3">
         Preset prices are estimates for illustration. Inflation calculations use official NBS CPI data.
       </p>
     </section>

@@ -6,7 +6,7 @@ interface FooterProps {
 
 export default function Footer({ status }: FooterProps) {
   return (
-    <footer className="mt-16 py-8 border-t border-gray-200 text-center text-sm text-gray-500">
+    <footer className="mt-16 py-8 border-t border-gray-200 text-center text-sm text-gray-600">
       <p className="font-medium text-charcoal">KoboLens</p>
       <p className="mt-1">
         Data: {status?.source ?? "National Bureau of Statistics Nigeria"} · Updated{" "}

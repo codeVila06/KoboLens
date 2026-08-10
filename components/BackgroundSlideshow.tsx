@@ -58,8 +58,8 @@ export default function BackgroundSlideshow() {
         );
       })}
 
-      <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/70 to-white/95" />
-      <div className="absolute inset-0 bg-sage-50/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/85 to-white/95" />
+      <div className="absolute inset-0 bg-sage-50/25" />
     </div>
   );
 }

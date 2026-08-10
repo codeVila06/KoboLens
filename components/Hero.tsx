@@ -6,7 +6,7 @@ export default function Hero() {
         <br />
         for inflation.
       </h1>
-      <p className="mt-3 text-base md:text-lg text-gray-600 max-w-md mx-auto">
+      <p className="mt-3 text-base md:text-lg text-gray-700 max-w-md mx-auto">
         See what your Naira was really worth using official NBS CPI data.
       </p>
     </section>
