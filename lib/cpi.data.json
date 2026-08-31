@@ -2,7 +2,7 @@
   "meta": {
     "baseYear": 2009,
     "baseValue": 100,
-    "lastUpdated": "2026-08-24",
+    "lastUpdated": "2026-08-31",
     "source": "National Bureau of Statistics Nigeria",
     "note": "Annual average CPI. 2024+ values bridged from NBS 2024 rebase (2024=100) to continuous 2009=100 series"
   },
@@ -29,7 +29,7 @@
     },
     {
       "year": 2014,
-      "cpi": 165.8
+      "cpi": 165.9
     },
     {
       "year": 2015,
@@ -73,7 +73,7 @@
     },
     {
       "year": 2025,
-      "cpi": 978.6
+      "cpi": 978.7
     },
     {
       "year": 2026,
